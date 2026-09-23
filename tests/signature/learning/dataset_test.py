@@ -4,6 +4,12 @@ from __future__ import absolute_import
 from ... import *
 import os
 
+import pytest
+
+pytestmark = pytest.mark.ml
+pytest.importorskip("numpy")
+pytest.importorskip("sklearn")
+
 from numpy import genfromtxt
 
 from talon.signature.learning import dataset as d
@@ -32,7 +38,7 @@ def test_parse_msg_sender():
     # if the message sender is stored in a separate file
     sender, msg = d.parse_msg_sender(MSG_FILENAME_WITH_BODY_SUFFIX)
     with open(MSG_FILENAME_WITH_BODY_SUFFIX) as f:
-        assert sender == u"john@example.com"
+        assert sender == "john@example.com"
         assert msg == f.read()
 
 
